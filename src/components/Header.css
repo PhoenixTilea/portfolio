@@ -1,0 +1,33 @@
+#header {
+	width: 100%;
+	border-bottom: 2px solid;
+	padding: 1em;
+	display: grid;
+	grid-template-columns: 75% 25%;
+}
+
+#header h1, #header h3 {
+	grid-column: 1 / -1;
+}
+
+#header h3 {
+	margin-top: 0;
+	font-style: italic;
+}
+
+#header nav {
+	display: flex;
+}
+
+#header nav a {
+	flex-basis: content;
+	padding: 1em 2em;
+}
+
+#header form {
+	display: flex;
+	justify-content: flex-end;
+}
+#header form * {
+	flex-basis: content;
+}

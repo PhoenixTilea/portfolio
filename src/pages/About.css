@@ -1,0 +1,18 @@
+#site-list {
+	margin-left: 2em;
+}
+#site-list li {
+	display: grid;
+	grid-template-columns: 10em auto;
+}
+#site-list li h3 {
+	text-align: right;
+}
+
+#skills {
+	margin: 2em;
+}
+#skills ul li {
+	display: inline-block;
+	margin-left: 1em;
+}

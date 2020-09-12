@@ -1,0 +1,44 @@
+{
+	"sites" : [
+		{
+			"name" : "LinkedIn",
+			"url" : "https://www.linkedin.com/in/sabelyn-thorpe-80150a1b2/",
+			"message" : "Connect with me on LinkedIn"
+		},
+		{
+			"name" : "GitHub",
+			"url" : "https://github.com/PhoenixTilea",
+			"message" : "Check out my work on GitHub"
+		}
+	],
+	"skills" : {
+	"languages" : [
+		"JavaScript",
+		"TypeScript",
+		"HTML",
+		"CSS",
+		"Git",
+		"C#",
+		"C++",
+		"Java"
+	],
+	"libs" : [
+		"Node.js",
+		"React",
+		"React Router",
+		"jQuery",
+		"jQueryUI",
+		"Axios",
+		"Jest"
+	]
+	},
+	"projects" : [
+		{
+			"name" : "Space Station Tracker",
+			"desc" : "This app chains API calls to get the coordinates of the International Space Station and, via the use of reverse geocoding, reports over which country (if any) the ISS is currently. Built with Node.js, React, and Axios.",
+			"url" : "/projects/iss-tracker/",
+			"github" : "https://github.com/PhoenixTilea/assignments/tree/master/module3/space-station-tracker",
+			"img" : ""
+		}
+	]
+}

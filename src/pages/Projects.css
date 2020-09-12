@@ -1,0 +1,21 @@
+#projects li {
+	padding: 1em;
+	display: grid;
+	grid-template-columns: 272px 20em auto;
+	grid-gap: 2em;
+}
+
+#projects li h3, #projects li p {
+	grid-column: 2 / span 2;
+	margin: 0;
+}
+#projects li a {
+	grid-row: 3;
+}
+#projects li img {
+	grid-column-start: 1;
+	grid-row: 1 / span 3;
+	border: 1px solid;
+	width: 270px;
+	height: 180px;
+}

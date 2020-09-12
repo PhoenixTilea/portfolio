@@ -1,0 +1,96 @@
+#app {
+	width: 100%;
+	padding: 2em 5%;
+}
+
+#app ul {
+	list-style-type: none;
+}
+
+#app a {
+	text-decoration: none;
+	font-weight: bold;
+	padding: 5px;
+}
+#app a:hover {
+	border: 1px solid;
+}
+
+#app button {
+	padding: 5px;
+	border-radius: 10%;
+	border: 2px outset;
+}
+#app button:active {
+	border-style: inset;
+}
+
+/* ==========
+// Dark Theme
+// ========== */
+
+#app.dark-theme {
+	background-color: #222222;
+	color: #eeeeee;
+}
+
+#app.dark-theme * {
+	border-color: #eeeeee;
+}
+
+#app.dark-theme header {
+	background-color: #2a2a2a;
+}
+
+#app.dark-theme a {
+	color: lightblue;
+}
+#app.dark-theme a:hover {
+	border-color: lightblue;
+	background-color: #111111;
+}
+#app.dark-theme a:visited {
+	color: lightgreen;
+}
+
+#app.dark-theme button {
+	#background-color: #111111;
+}
+#app.dark-theme button:hover {
+	background-color: #333333;
+}
+
+/* ==========
+// Light Theme
+// ========== */
+
+#app.light-theme {
+	background-color: #dddddd;
+	color: #111111;
+}
+
+#app.light-theme * {
+	border-color: #111111;
+}
+
+#app.light-theme header {
+	background-color: #c9c9c9;
+}
+
+#app.light-theme a {
+	color: darkblue;
+}
+#app.light-theme a:hover {
+	border-color: darkblue;
+	background-color: #cccccc;
+}
+#app.light-theme a:visited {
+	color: darkgreen;
+}
+
+#app.light-theme button {
+	background-color: #cccccc;
+}
+#app.light-theme button:hover {
+	background-color: white;
+}

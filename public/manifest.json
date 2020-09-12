@@ -1,0 +1,9 @@
+{
+  "short_name": "Portfolio",
+  "name": "Sabelyn Thorpe's Portfolio",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#eeeeee",
+  "background_color": "#222222"
+}
