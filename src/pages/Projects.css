@@ -1,8 +1,14 @@
+#projects {
+	width: 100%;
+}
 #projects li {
+	width: 80%;
 	padding: 1em;
 	display: grid;
-	grid-template-columns: 272px 20em auto;
+	grid-template-columns: 542px 20em auto;
 	grid-gap: 2em;
+	align-items: start;
+	align-content: top;
 }
 
 #projects li h3, #projects li p {
@@ -16,6 +22,6 @@
 	grid-column-start: 1;
 	grid-row: 1 / span 3;
 	border: 1px solid;
-	width: 270px;
-	height: 180px;
+	width: 540px;
+	height: 360px;
 }

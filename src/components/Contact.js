@@ -10,7 +10,7 @@ export default function Contact(props) {
 			</li>
 			{props.sites.map(site => (
 				<li key={site.name}>
-					<a href={site.url} target="_blank">{site.name}</a>
+					<a href={site.url} target="_new">{site.name}</a>
 					<p>{site.message}</p>
 				</li>
 			))}
