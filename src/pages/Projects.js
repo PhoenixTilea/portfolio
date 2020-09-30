@@ -11,7 +11,9 @@ export default function Projects() {
 			<li key={project.name}>
 				<img src={project.img} alt={`screenshot of the ${project.name} app`} />
 				<h3>{project.name}</h3>
-				<p>{project.desc}</p>
+				<p>
+					{project.desc + "\nBuilt with " + project.tech.join(", ")}
+				</p>
 				<a href={project.url} target="_new">View the App</a>
 				<a href={project.github} target="_new">View on GitHub</a>
 			</li>

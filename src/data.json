@@ -14,6 +14,7 @@
 	"skills" : {
 	"languages" : [
 		"JavaScript",
+		"es6",
 		"TypeScript",
 		"HTML",
 		"CSS",
@@ -23,26 +24,38 @@
 		"Java"
 	],
 	"libs" : [
-		"Node.js",
+		"NodeJS",
+		"expressJS",
+		"MongoDB",
+		"Mongoose",
 		"React",
 		"React Router",
 		"jQuery",
 		"jQueryUI",
-		"Axios",
-		"Jest"
+		"Axios"
 	]
 	},
 	"projects" : [
 		{
+			"name" : "HTTP Access",
+			"desc" : "A simple and accessible app for testing basic HTTP requests. I created this out of a need for a way to test external APIs and my own servers while tools like Postman are not friendly to screen reader software.",
+			"tech" : ["nodeJS", "expressJS", "JavaScript", "es6", "React", "Axios"],
+			"url" : "https://http-access.herokuapp.com/",
+			"github" : "https://github.com/PhoenixTilea/http-access",
+			"img" : ""
+		},
+		{
 			"name" : "Remote Cat Therapy",
-			"desc" : "A site where the user can view thousands of cat images, provide a username, and add images to a list of favorites for later viewing. Created with React, React Router, and Axios.",
+			"desc" : "A site where the user can view thousands of cat images, provide a username, and add images to a list of favorites for later viewing.",
+			"tech" : ["nodeJS", "JavaScript", "React", "React Router", "Axios"],
 			"url" : "https://sabelyn-remote-cat-therapy.surge.sh",
 			"github" : "",
 			"img" : ""
 		},
 		{
 			"name" : "Space Station Tracker",
-			"desc" : "This app chains API calls to get the coordinates of the International Space Station and, via the use of reverse geocoding, reports over which country (if any) the ISS is currently. Built with Node.js, React, and Axios.",
+			"desc" : "This app chains API calls to get the coordinates of the International Space Station and, via the use of reverse geocoding, reports over which country (if any) the ISS is currently.",
+			"tech" : ["nodeJS", "JavaScript", "React", "Axios"],
 			"url" : "https://sabelyn-iss-tracker.surge.sh",
 			"github" : "https://github.com/PhoenixTilea/assignments/tree/master/module3/space-station-tracker",
 			"img" : "/img/iss_tracker.png"
