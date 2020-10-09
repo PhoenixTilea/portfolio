@@ -42,15 +42,7 @@
 			"tech" : ["nodeJS", "expressJS", "JavaScript", "es6", "React", "Axios"],
 			"url" : "https://http-access.herokuapp.com/",
 			"github" : "https://github.com/PhoenixTilea/http-access",
-			"img" : ""
-		},
-		{
-			"name" : "Remote Cat Therapy",
-			"desc" : "A site where the user can view thousands of cat images, provide a username, and add images to a list of favorites for later viewing.",
-			"tech" : ["nodeJS", "JavaScript", "React", "React Router", "Axios"],
-			"url" : "https://sabelyn-remote-cat-therapy.surge.sh",
-			"github" : "",
-			"img" : ""
+			"img" : "img/http-access-screenshot.png"
 		},
 		{
 			"name" : "Space Station Tracker",
