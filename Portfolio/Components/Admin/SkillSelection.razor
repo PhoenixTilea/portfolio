@@ -1,0 +1,31 @@
+@using Portfolio.Models
+
+<MudToggleGroup T="int" SelectionMode="SelectionMode.MultiSelection" @bind-Values="_skills">
+  @foreach (var skill in AllSkills)
+  {
+    <MudToggleItem Value="skill.Id" Text="skill.Name" />
+  }
+</MudToggleGroup>
+<MudButton type-"ButtonType.Button" @onclick="SaveSkills">Save Skills</MudButton>
+
+@code
+{
+  [Parameter, EditorRequired]
+  public List<Skill> AllSkills { get; set; } = null!;
+  [Parameter, EditorRequired]
+  public List<int> SelectedSkills { get; set; } = null!;
+  [Parameter, EditorRequired]
+  public EventCallback<List<int>> UpdateSkills { get; set; }
+
+  private IEnumerable<int> _skills = [];
+
+  protected override void OnParametersSet()
+  {
+    _skills = SelectedSkills.ToList();
+  }
+
+  private void SaveSkills()
+  {
+    UpdateSkills.InvokeAsync(_skills.ToList());
+  }
+}
