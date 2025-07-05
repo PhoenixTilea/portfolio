@@ -41,7 +41,7 @@ public sealed class EmployerRepository : IEmployerRepository
       .Select(e => e.ToModel())
       .ToListAsync();
 
-  public async Task<Employer?> GetById(int id) =>
+  public async Task<Employer?> Get(int id) =>
     (await _context.Employers.FindAsync(id))?.ToModel();
 
   public async Task Update(Employer model)
