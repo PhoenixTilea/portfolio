@@ -18,7 +18,7 @@ public sealed class JobRepository : IJobRepository
   {
     var entity = new JobEntity()
     {
-      EmployerName = model.EmployerName,
+      Employer = (await _context.Employers.FindAsync(model.Employer.Id))!,
       JobTitle = model.JobTitle,
       StartDate = model.StartDate,
       EndDate = model.EndDate,
@@ -58,7 +58,6 @@ public sealed class JobRepository : IJobRepository
     if (job is not null)
     {
       job.JobTitle = model.JobTitle;
-      job.EmployerName = model.EmployerName;
       job.Type = model.Type;
       job.StartDate = model.StartDate;
       job.EndDate = model.EndDate;
@@ -66,6 +65,11 @@ public sealed class JobRepository : IJobRepository
       job.SkillsUsed = await _context.Skills
         .Where(s => model.SkillsUsed.Contains(s.Id))
         .ToListAsync();
+
+      if (model.Employer.Id != job.Employer.Id)
+      {
+        job.Employer = (await _context.Employers.FindAsync(model.Employer.Id))!;
+      }
 
       await _context.SaveChangesAsync();
     }

@@ -4,5 +4,9 @@ using Models;
 
 public interface ISkillService
 {
-  Task<Dictionary<int, Skill>> GetAllSkills();
+  Task AddNewSkill(Skill model);
+  Task DeleteSkill(int id);
+  Task<List<Skill>> GetAllSkills();
+  Task<Skill?> GetSkillById(int id);
+  Task UpdateSkill(Skill model);
 }

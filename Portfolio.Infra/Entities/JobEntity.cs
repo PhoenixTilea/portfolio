@@ -10,12 +10,12 @@ public sealed class JobEntity
 {
   public int Id { get; set; }
 
-  public DateOnly? EndDate { get; set; }
-  public required string EmployerName { get; set; }
+  public DateTime? EndDate { get; set; }
+  public EmployerEntity Employer { get; set; } = null!;
   public required string JobTitle { get; set; }
   public string Responsibilities { get; set; } = string.Empty;
   public List<SkillEntity> SkillsUsed { get; set; } = [];
-  public required DateOnly StartDate { get; set; }
+  public required DateTime StartDate { get; set; }
   public EmploymentType Type { get; set; }
 }
 
@@ -23,7 +23,13 @@ public sealed class JobEntityConfig : IEntityTypeConfiguration<JobEntity>
 {
   public void Configure(EntityTypeBuilder<JobEntity> builder)
   {
-    builder.Navigation(e => e.SkillsUsed).AutoInclude();
+    builder.HasOne(j => j.Employer)
+      .WithMany();
+    builder.HasMany(j => j.SkillsUsed)
+      .WithMany();
+
+    builder.Navigation(j => j.Employer).AutoInclude();
+    builder.Navigation(j => j.SkillsUsed).AutoInclude();
   }
 }
 
@@ -32,7 +38,7 @@ public static class JobEntityExtensions
   public static Job ToModel(this JobEntity entity) => new()
   {
     Id = entity.Id,
-    EmployerName = entity.EmployerName,
+    Employer = entity.Employer.ToModel(),
     JobTitle = entity.JobTitle,
     StartDate = entity.StartDate,
     EndDate = entity.EndDate,

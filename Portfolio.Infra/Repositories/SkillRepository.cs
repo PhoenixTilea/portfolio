@@ -21,10 +21,8 @@ public sealed class SkillRepository : ISkillRepository
       Name = model.Name,
       Type = model.Type,
       LearnedBy = model.LearnedBy,
-      YearLearned = model.YearLearned,
-      UsedAt = await _context.Jobs
-        .Where(e => model.UsedAt.Contains(e.Id))
-        .ToListAsync()
+      Proficiency = model.Proficiency,
+      YearLearned = model.YearLearned
     };
 
     _context.Add(entity);
@@ -46,4 +44,22 @@ public sealed class SkillRepository : ISkillRepository
       .OrderBy(s => s.Name)
       .Select(s => s.ToModel())
       .ToListAsync();
+
+  public async Task<Skill?> Get(int id) =>
+    (await _context.Skills.FindAsync(id))?.ToModel();
+
+  public async Task Update(Skill model)
+  {
+    var skill = await _context.Skills.FindAsync(model.Id);
+    if (skill is not null)
+    {
+      skill.Name = model.Name;
+      skill.LearnedBy = model.LearnedBy;
+      skill.Type = model.Type;
+      skill.Proficiency = model.Proficiency;
+      skill.YearLearned = model.YearLearned;
+
+      await _context.SaveChangesAsync();
+    }
+  }
 }

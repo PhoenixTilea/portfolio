@@ -13,9 +13,9 @@ public sealed class SkillEntity
   public int Id { get; set; }
 
   public required List<Learned> LearnedBy { get; set; } = [];
-  public required string Name { get; init; }
+  public required string Name { get; set; }
+  public required Proficiency Proficiency { get; set; }
   public required SkillType Type { get; set; }
-  public List<JobEntity> UsedAt { get; set; } = [];
   public int? YearLearned { get; set; }
 }
 
@@ -23,10 +23,6 @@ public sealed class SkillEntityConfig : IEntityTypeConfiguration<SkillEntity>
 {
   public void Configure(EntityTypeBuilder<SkillEntity> builder)
   {
-    builder.HasMany(s => s.UsedAt)
-      .WithMany(e => e.SkillsUsed);
-    builder.Navigation(s => s.UsedAt).AutoInclude();
-
     builder.Property(s => s.LearnedBy)
       .HasConversion(
         v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
@@ -46,9 +42,7 @@ public static class SkillEntityExtensions
     Name = entity.Name,
     Type = entity.Type,
     LearnedBy = entity.LearnedBy,
-    YearLearned = entity.YearLearned,
-    UsedAt = entity.UsedAt
-      .Select(e => e.Id)
-      .ToHashSet()
+    Proficiency = entity.Proficiency,
+    YearLearned = entity.YearLearned
   };
 }

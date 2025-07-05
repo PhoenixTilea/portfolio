@@ -15,18 +15,15 @@ public sealed class JobService : IJobService
   public Task AddNewJob(Job newJob) =>
     _jobRepository.Add(newJob);
 
-  public async Task<Dictionary<int, Job>> GetAllJobs()
-  {
-    var jobs = await _jobRepository.Get();
-    return jobs.ToDictionary(
-      j => j.Id,
-      j => j
-    );
-  }
+  public Task DeleteJob(int id) =>
+    _jobRepository.Delete(id);
 
-  public async Task<Job> GetJobById(int id) =>
-    (await _jobRepository.Get(id)) ?? throw new InvalidOperationException($"Job with ID {id} could not be found.");
+  public Task<List<Job>> GetAllJobs() =>
+    _jobRepository.Get();
 
-  public Task UpdateJob(Job job) =>
-    _jobRepository.Update(job);
+  public Task<Job?> GetJobById(int id) =>
+    _jobRepository.Get(id);
+
+  public Task UpdateJob(Job Job) =>
+    _jobRepository.Update(Job);
 }
