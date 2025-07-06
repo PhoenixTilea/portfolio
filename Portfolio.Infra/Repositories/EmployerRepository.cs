@@ -16,7 +16,7 @@ public sealed class EmployerRepository : IEmployerRepository
 
   public Task Add(Employer model)
   {
-    _context.Add(new EmployerEntity()
+    _context.Employers.Add(new EmployerEntity()
     {
       Name = model.Name,
       Phone = model.Phone,

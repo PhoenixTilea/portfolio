@@ -7,6 +7,7 @@ using Services;
 public static class CoreServiceCollectionExtensions
 {
   public static IServiceCollection AddCoreServices(this IServiceCollection services) =>
-    services.AddScoped<ISkillService, SkillService>()
-      .AddScoped<IJobService, JobService>();
+    services.AddScoped<IEmployerService, EmployerService>()
+      .AddScoped<IJobService, JobService>()
+      .AddScoped<ISkillService, SkillService>();
 }

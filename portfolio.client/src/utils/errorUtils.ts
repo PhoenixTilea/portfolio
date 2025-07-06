@@ -2,7 +2,7 @@ import type {FetchBaseQueryError} from "@reduxjs/toolkit/query";
 
 export const getMsgFromApiError = (error: unknown): string => {
   if (isFetchBaseQueryError(error)) {
-    return "error" in error ? error.error : JSON.stringify(error.data);
+    return "error" in error ? error.error : JSON.stringify(error);
   } else if (isSerializedError(error)) {
     return error.message;
   }

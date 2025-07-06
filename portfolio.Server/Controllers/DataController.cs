@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 /// for enums and other constants.
 /// </summary>
 [ApiController]
-[Route("data")]
+[Route("api/data")]
 public sealed class DataController : ControllerBase
 {
   [HttpGet("enums")]

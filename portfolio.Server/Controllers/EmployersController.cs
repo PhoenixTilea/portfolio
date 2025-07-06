@@ -5,8 +5,8 @@ using Dto;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("[Controller]")]
-public sealed class EmployersController : ControllerBase
+[Route("api/employers")]
+public sealed class EmployersController : Controller
 {
   private readonly IEmployerService _employerService;
 
@@ -22,10 +22,10 @@ public sealed class EmployersController : ControllerBase
     return Created();
   }
 
-  [HttpDelete("/delete/{id}")]
-  public async Task<IActionResult> DeleteEmployer(int id)
+  [HttpDelete("delete/{employerId}")]
+  public async Task<IActionResult> DeleteEmployer(int employerId)
   {
-    await _employerService.DeleteEmployer(id);
+    await _employerService.DeleteEmployer(employerId);
     return NoContent();
   }
 
@@ -36,10 +36,10 @@ public sealed class EmployersController : ControllerBase
     return Ok(list);
   }
 
-  [HttpGet("get/{id}")]
-  public async Task<IActionResult> GetEmployer(int id)
+  [HttpGet("get/{employerId}")]
+  public async Task<IActionResult> GetEmployer(int employerId)
   {
-    var emp = await _employerService.GetEmployerById(id);
+    var emp = await _employerService.GetEmployerById(employerId);
     if (emp is null)
     {
       return NotFound();
@@ -48,10 +48,10 @@ public sealed class EmployersController : ControllerBase
     return Ok(emp);
   }
 
-  [HttpPut("update/{id}")]
-  public async Task<IActionResult> UpdateEmployer(int id, [FromBody] EmployerDto employer)
+  [HttpPut("update/{employerId}")]
+  public async Task<IActionResult> UpdateEmployer(int employerId, [FromBody] EmployerDto employer)
   {
-    if (!id.Equals(employer.Id))
+    if (!employerId.Equals(employer.Id))
     {
       return BadRequest("Ids do not match.");
     }

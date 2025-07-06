@@ -5,8 +5,8 @@ using Dto;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("[Controller]")]
-public sealed class JobsController : ControllerBase
+[Route("api/jobs")]
+public sealed class JobsController : Controller
 {
   private readonly IEmployerService _employerService;
   private readonly IJobService _jobService;
@@ -30,10 +30,10 @@ public sealed class JobsController : ControllerBase
     return Created();
   }
 
-  [HttpDelete("/delete/{id}")]
-  public async Task<IActionResult> DeleteJob(int id)
+  [HttpDelete("delete/{jobId}")]
+  public async Task<IActionResult> DeleteJob(int jobId)
   {
-    await _jobService.DeleteJob(id);
+    await _jobService.DeleteJob(jobId);
     return NoContent();
   }
 
@@ -44,10 +44,10 @@ public sealed class JobsController : ControllerBase
     return Ok(list);
   }
 
-  [HttpGet("get/{id}")]
-  public async Task<IActionResult> GetJob(int id)
+  [HttpGet("get/{jobId}")]
+  public async Task<IActionResult> GetJob(int jobId)
   {
-    var job = await _jobService.GetJobById(id);
+    var job = await _jobService.GetJobById(jobId);
     if (job is null)
     {
       return NotFound();
@@ -56,10 +56,10 @@ public sealed class JobsController : ControllerBase
     return Ok(job);
   }
 
-  [HttpPut("update/{id}")]
-  public async Task<IActionResult> UpdateJob(int id, [FromBody] JobDto job)
+  [HttpPut("update/{jobId}")]
+  public async Task<IActionResult> UpdateJob(int jobId, [FromBody] JobDto job)
   {
-    if (!id.Equals(job.Id))
+    if (!jobId.Equals(job.Id))
     {
       return BadRequest("Ids do not match.");
     }

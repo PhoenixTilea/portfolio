@@ -1,5 +1,6 @@
 namespace Portfolio.Infra;
 
+using System.IO;
 using Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Sqlite;
@@ -12,6 +13,7 @@ public class PortfolioContext() : DbContext()
 
   protected override void OnConfiguring(DbContextOptionsBuilder builder)
   {
-    builder.UseSqlite("Data Source = Portfolio.db");
+    var path = Path.Combine(Directory.GetCurrentDirectory(), "..", "Portfolio.Infra", "Portfolio.db");
+    builder.UseSqlite($"Data Source = {path}");
   }
 }

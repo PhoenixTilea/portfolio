@@ -8,7 +8,7 @@ import {validateEmployerFormData, Errors} from "./validators";
 
 type Props = {
   employer?: Employer;
-  onCancel?: () => void;
+  onCancel: () => void;
 };
 type Inputs = Omit<EmployerFormData, "id">;
 
@@ -54,8 +54,8 @@ const EmployerForm: FC<Props> = ({employer, onCancel}) => {
       : inputs;
 
     employer
-      ? addEmployer(data)
-      : updateEmployer(data);
+      ? updateEmployer(data)
+      : addEmployer(data);
   }
 
   return (
@@ -78,9 +78,9 @@ const EmployerForm: FC<Props> = ({employer, onCancel}) => {
         type="submit"
         loading={addIsLoading || updateIsLoading}
       >
-        {employer ? "Add" : "Update"} Employer
+        {!employer ? "Add" : "Update"} Employer
       </Button>
-      {onCancel
+      {employer
         ? <Button type="button" onClick={onCancel}>Cancel</Button>
         : null
       }

@@ -5,8 +5,8 @@ using Dto;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("[Controller]")]
-public sealed class SkillsController : ControllerBase
+[Route("api/skills")]
+public sealed class SkillsController : Controller
 {
   private readonly ISkillService _skillService;
 
@@ -22,10 +22,10 @@ public sealed class SkillsController : ControllerBase
     return Created();
   }
 
-  [HttpDelete("/delete/{id}")]
-  public async Task<IActionResult> DeleteSkill(int id)
+  [HttpDelete("delete/{skillId}")]
+  public async Task<IActionResult> DeleteSkill(int skillId)
   {
-    await _skillService.DeleteSkill(id);
+    await _skillService.DeleteSkill(skillId);
     return NoContent();
   }
 
@@ -36,10 +36,10 @@ public sealed class SkillsController : ControllerBase
     return Ok(list);
   }
 
-  [HttpGet("get/{id}")]
-  public async Task<IActionResult> GetSkill(int id)
+  [HttpGet("get/{skillId}")]
+  public async Task<IActionResult> GetSkill(int skillId)
   {
-    var skill = await _skillService.GetSkillById(id);
+    var skill = await _skillService.GetSkillById(skillId);
     if (skill is null)
     {
       return NotFound();
@@ -48,10 +48,10 @@ public sealed class SkillsController : ControllerBase
     return Ok(skill);
   }
 
-  [HttpPut("update/{id}")]
-  public async Task<IActionResult> UpdateSkill(int id, [FromBody] SkillDto skill)
+  [HttpPut("update/{skillId}")]
+  public async Task<IActionResult> UpdateSkill(int skillId, [FromBody] SkillDto skill)
   {
-    if (!id.Equals(skill.Id))
+    if (!skillId.Equals(skill.Id))
     {
       return BadRequest("Ids do not match.");
     }
