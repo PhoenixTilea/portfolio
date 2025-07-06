@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/jobs")]
-public sealed class JobsController : Controller
+public sealed class JobsController : ControllerBase
 {
   private readonly IEmployerService _employerService;
   private readonly IJobService _jobService;

@@ -13,7 +13,7 @@ public class PortfolioContext() : DbContext()
 
   protected override void OnConfiguring(DbContextOptionsBuilder builder)
   {
-    var path = Path.Combine(Directory.GetCurrentDirectory(), "..", "Portfolio.Infra", "Portfolio.db");
+    var path = Path.Combine(Directory.GetCurrentDirectory(), "..", "Portfolio.Infra", "Data", "Portfolio.db");
     builder.UseSqlite($"Data Source = {path}");
   }
 }

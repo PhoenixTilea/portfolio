@@ -4,11 +4,11 @@ import {useEffect, useState} from "react";
 import {useAddEmployerMutation, useUpdateEmployerMutation} from "../../state/hooks";
 import type {Employer, EmployerFormData} from "../../types/employer";
 import {getMsgFromApiError} from "../../utils/errorUtils";
-import {validateEmployerFormData, Errors} from "./validators";
+import {Errors, validateEmployerFormData} from "./validators";
 
 type Props = {
   employer?: Employer;
-  onCancel: () => void;
+  onCancel?: () => void;
 };
 type Inputs = Omit<EmployerFormData, "id">;
 

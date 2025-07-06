@@ -1,5 +1,3 @@
-import EmployerDashboard from "./pages/EmployerDashboard";
-
-const App = () => <EmployerDashboard />;
+const App = () => <div></div>;
 
 export default App;

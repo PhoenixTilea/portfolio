@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/skills")]
-public sealed class SkillsController : Controller
+public sealed class SkillsController : ControllerBase
 {
   private readonly ISkillService _skillService;
 

@@ -486,4 +486,4 @@ $RECYCLE.BIN/
 **/bin/
 **/obj/
 .vscode/
-**/Portfolio.db
+**/Data/*
