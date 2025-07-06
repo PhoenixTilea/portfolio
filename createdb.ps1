@@ -1,0 +1,1 @@
+dotnet ef migrations add InitialCreate --context PortfolioContext --project Portfolio.Infra

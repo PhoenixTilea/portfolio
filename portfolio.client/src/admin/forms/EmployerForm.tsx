@@ -1,17 +1,18 @@
 import {Alert, Button, TextField} from "@mui/material";
 import type {ChangeEvent, FC, FormEvent} from "react";
 import {useEffect, useState} from "react";
-import {useAddEmployerMutation, useUpdateEmployerMutation} from "../state/hooks";
-import type {Employer, EmployerFormData} from "../types/employer";
-import {getMsgFromApiError} from "../utils/errorUtils";
+import {useAddEmployerMutation, useUpdateEmployerMutation} from "../../state/hooks";
+import type {Employer, EmployerFormData} from "../../types/employer";
+import {getMsgFromApiError} from "../../utils/errorUtils";
 import {validateEmployerFormData, Errors} from "./validators";
 
 type Props = {
   employer?: Employer;
+  onCancel?: () => void;
 };
 type Inputs = Omit<EmployerFormData, "id">;
 
-const EmployerForm: FC<Props> = ({employer}) => {
+const EmployerForm: FC<Props> = ({employer, onCancel}) => {
   const [addEmployer, {isLoading: addIsLoading, error: addError}] = useAddEmployerMutation();
   const [updateEmployer, {isLoading: updateIsLoading, error: updateError}] = useUpdateEmployerMutation();
 
@@ -36,7 +37,7 @@ const EmployerForm: FC<Props> = ({employer}) => {
     const {name, value} = e.currentTarget;
     setInputs(prev => ({
       ...prev,
-      [name as keyof EmployerFormData]: value.trim()
+      [name as keyof Inputs]: value.trim()
     }));
   }
 
@@ -55,7 +56,7 @@ const EmployerForm: FC<Props> = ({employer}) => {
     employer
       ? addEmployer(data)
       : updateEmployer(data);
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -79,6 +80,10 @@ const EmployerForm: FC<Props> = ({employer}) => {
       >
         {employer ? "Add" : "Update"} Employer
       </Button>
+      {onCancel
+        ? <Button type="button" onClick={onCancel}>Cancel</Button>
+        : null
+      }
     </form>
   );
 }
@@ -89,7 +94,5 @@ const toFormData = (employer?: Employer) => ({
   linkedIn: employer?.linkedIn ?? "",
   website: employer?.website ?? ""
 });
-
-
 
 export default EmployerForm;

@@ -1,5 +1,5 @@
-import type {EmployerFormData} from "../types/employer";
-import {isNullOrWhiteSpace} from "../utils/stringUtils";
+import type {EmployerFormData} from "../../types/employer";
+import {isNullOrWhiteSpace} from "../../utils/stringUtils";
 
 export type Errors<T> = Partial<Record<keyof T, string>>;
 

@@ -23,13 +23,15 @@ const EmployerList: FC<Props> = ({onEdit}) => {
   }
 
   return (
-    <Grid>
+    <Grid container spacing={8}>
       {employers.map(emp => (
-        <EmployerCard key={emp.id}
-          employer={emp}
-          onDelete={handleDelete}
-          onEdit={onEdit}
-        />
+        <Grid size={{xs: 12, sm: 6, md: 4}}>
+          <EmployerCard key={emp.id}
+            employer={emp}
+            onDelete={handleDelete}
+            onEdit={onEdit}
+          />
+        </Grid>
       ))}
     </Grid>
   );
