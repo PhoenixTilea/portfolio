@@ -1,9 +1,12 @@
 import type {EmployerFormData} from "../../types/employer";
+import type {JobFormData} from "../../types/job";
+import type {SkillFormData} from "../../types/skill";
+import type {Enums} from "../../types/staticData";
 import {isNullOrWhiteSpace} from "../../utils/stringUtils";
 
 export type Errors<T> = Partial<Record<keyof T, string>>;
 
-export const validateEmployerFormData = (data: EmployerFormData): Errors<EmployerFormData> => {
+export const validateEmployerFormData = (data: Omit<EmployerFormData, "id">): Errors<EmployerFormData> => {
   const errors: Errors<EmployerFormData> = {};
   if (data.name.trim().length < 5) {
     errors.name = "Must be at least 5 characters long.";
@@ -16,6 +19,26 @@ export const validateEmployerFormData = (data: EmployerFormData): Errors<Employe
   }
   if (!isNullOrWhiteSpace(data.website) && !isValidUrl(data.website as string)) {
     errors.website = "Website must be a valid URL.";
+  }
+
+  return errors;
+}
+
+export const validateJobFormData = (job: Omit<JobFormData, "id">): Errors<JobFormData> => {
+  const errors: Errors<JobFormData> = {};
+
+  return errors;
+}
+
+export const validateSkillFormData = (skill: Omit<SkillFormData, "id">, enums: Enums): Errors<SkillFormData> => {
+  const errors: Errors<SkillFormData> = {};
+  if (skill.name.length < 2) {
+    // If I ever learn C or R for some reason, I will update this logic.
+    errors.name = "Skill name must be at least 2 characters long.";
+  }
+  const currentYear = new Date().getFullYear();
+  if (skill.yearLearned && (skill.yearLearned < 2017 || skill.yearLearned > currentYear)) {
+    errors.yearLearned = `Year learned must be between 2017 and ${currentYear}.`;
   }
 
   return errors;

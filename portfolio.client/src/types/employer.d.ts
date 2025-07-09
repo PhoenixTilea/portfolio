@@ -6,10 +6,6 @@ export type Employer = {
   website?: string;
 };
 
-export type EmployerFormData = {
+export type EmployerFormData = Employer & {
   id?: number;
-  linkedIn?: string;
-  name: string;
-  phone?: string;
-  website?: string;
 };

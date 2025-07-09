@@ -9,16 +9,11 @@ export type Job = {
   responsibilities: string;
   skillsUsed: Skill[];
   startDate: Date;
-  type: number;
+  type: string;
 };
 
-export type JobFormData = {
+export type JobFormData = Omit<Job, "employer"> & {
   id?: number;
   employerId: number;
-  endDate?: Date;
-  jobTitle: string;
-  responsibilities: string;
   skillsUsed: number[];
-  startDate: Date;
-  type: number;
 };

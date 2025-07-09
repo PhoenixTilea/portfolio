@@ -50,9 +50,9 @@ const EmployerForm: FC<Props> = ({employer, onCancel}) => {
       return;
     }
 
-    const data = employer
+    const data = (employer
       ? {...inputs, id: employer.id}
-      : inputs;
+      : inputs) as EmployerFormData;
 
     employer
       ? updateEmployer(data)
