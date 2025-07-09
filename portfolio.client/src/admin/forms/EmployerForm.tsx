@@ -4,11 +4,12 @@ import {useEffect, useState} from "react";
 import {useAddEmployerMutation, useUpdateEmployerMutation} from "../../state/hooks";
 import type {Employer, EmployerFormData} from "../../types/employer";
 import {getMsgFromApiError} from "../../utils/errorUtils";
+import {isNullOrWhiteSpace} from "../../utils/stringUtils";
 import {Errors, validateEmployerFormData} from "./validators";
 
 type Props = {
   employer?: Employer;
-  onCancel?: () => void;
+  onCancel: () => void;
 };
 type Inputs = Omit<EmployerFormData, "id">;
 
@@ -63,10 +64,43 @@ const EmployerForm: FC<Props> = ({employer, onCancel}) => {
       <TextField
         id="empName"
         name="name"
-        label="Employer Name"
+        value={inputs.name}
+        label="Employer Name *"
         onChange={handleChange}
         error={errors?.name ? true : false}
         helperText={errors?.name ?? ""}
+        required
+        slotProps={{htmlInput: {minLength: 5}}}
+      />
+      <TextField
+        id="empPhone"
+        type="tel"
+        name="phone"
+        value={inputs.phone}
+        label="Employer Phone Number"
+        onChange={handleChange}
+        error={errors?.phone ? true : false}
+        helperText={errors?.phone ?? ""}
+      />
+      <TextField
+        id="empLinkedIn"
+        type="url"
+        name="linkedIn"
+        value={inputs.linkedIn}
+        label="Employer LinkedIn"
+        onChange={handleChange}
+        error={errors?.linkedIn ? true : false}
+        helperText={errors?.linkedIn ?? ""}
+      />
+      <TextField
+        id="empWebsite"
+        type="url"
+        name="website"
+        value={inputs.website}
+        label="Employer Website"
+        onChange={handleChange}
+        error={errors?.website ? true : false}
+        helperText={errors?.website ?? ""}
       />
 
       {apiError
@@ -93,6 +127,14 @@ const toFormData = (employer?: Employer) => ({
   phone: employer?.phone ?? "",
   linkedIn: employer?.linkedIn ?? "",
   website: employer?.website ?? ""
+});
+
+const sanitizeFormData = (data: EmployerFormData): EmployerFormData => ({
+  id: data.id ?? undefined,
+  name: data.name.trim(),
+  phone: isNullOrWhiteSpace(data.phone) ? undefined : data.phone!.trim(),
+  linkedIn: isNullOrWhiteSpace(data.linkedIn) ? undefined : data.linkedIn!.trim(),
+  website: isNullOrWhiteSpace(data.website) ? undefined : data.website!.trim()
 });
 
 export default EmployerForm;
