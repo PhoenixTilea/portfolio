@@ -12,7 +12,7 @@ export type Job = {
   type: string;
 };
 
-export type JobFormData = Omit<Job, "employer"> & {
+export type JobFormData = Omit<Job, "employer" | "skillsUsed"> & {
   id?: number;
   employerId: number;
   skillsUsed: number[];

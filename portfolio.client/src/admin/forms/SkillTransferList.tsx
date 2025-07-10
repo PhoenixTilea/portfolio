@@ -9,11 +9,10 @@ type Lists = {
 };
 type Props = {
   selectedSkills: number[];
-  onSelectSkill: (id: number) => void;
-  onDeselectSkill: (id: number) => void;
+  onToggleSkill: (id: number) => void;
 }
 
-const SkillTransferList: FC<Props> = ({selectedSkills, onSelectSkill, onDeselectSkill}) => {
+const SkillTransferList: FC<Props> = ({selectedSkills, onToggleSkill}) => {
   const {data: allSkills} = useGetSkillsQuery();
 
   const {left, right} = useMemo<Lists>(() => {
@@ -36,11 +35,11 @@ const SkillTransferList: FC<Props> = ({selectedSkills, onSelectSkill, onDeselect
     <Grid container spacing={8}>
       <Grid size={6}>
         <h4>Skills</h4>
-        <SkillList list={left} onSelect={onSelectSkill} />
+        <SkillList list={left} onSelect={onToggleSkill} />
       </Grid>
       <Grid size={6}>
         <h4>Selected Skills</h4>
-        <SkillList list={right} onSelect={onDeselectSkill} />
+        <SkillList list={right} onSelect={onToggleSkill} />
       </Grid>
     </Grid>
   );

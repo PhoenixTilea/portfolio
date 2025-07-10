@@ -30,7 +30,7 @@ export const validateJobFormData = (job: Omit<JobFormData, "id">): Errors<JobFor
   return errors;
 }
 
-export const validateSkillFormData = (skill: Omit<SkillFormData, "id">, enums: Enums): Errors<SkillFormData> => {
+export const validateSkillFormData = (skill: Omit<SkillFormData, "id">): Errors<SkillFormData> => {
   const errors: Errors<SkillFormData> = {};
   if (skill.name.length < 2) {
     // If I ever learn C or R for some reason, I will update this logic.
