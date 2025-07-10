@@ -1,7 +1,7 @@
 import {Grid} from "@mui/material";
 import type {FC} from "react";
 import {memo, useCallback} from "react";
-import {useDeleteEmployerMutation, useGetEmployersQuery} from "../state/hooks";
+import {useDeleteEmployerMutation, useGetEmployersQuery} from "../../state/hooks";
 import EmployerCard from "./EmployerCard";
 
 type Props = {

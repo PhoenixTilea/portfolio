@@ -6,7 +6,7 @@ import dayJs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 import type {FC} from "react";
-import {useMemo} from "react";
+import {memo, useMemo} from "react";
 
 type Props = {
   startDate: Date;
@@ -21,7 +21,7 @@ const maxDate = dayJs();
 
 const JobDateRange: FC<Props> = ({startDate, endDate, onDateChange}) => {
   const start = useMemo(() => dayJs(startDate), [startDate]);
-  const end = useMemo(() => dayJs(endDate), [endDate]);
+  const end = useMemo(() => endDate ? dayJs(endDate) : undefined, [endDate]);
 
   const handleStartChange = (value: PickerValidDate | null) => {
     const date = value ?? minDate;
@@ -69,4 +69,4 @@ const JobDateRange: FC<Props> = ({startDate, endDate, onDateChange}) => {
   );
 }
 
-export default JobDateRange;
+export default memo(JobDateRange);

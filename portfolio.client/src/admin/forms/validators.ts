@@ -26,6 +26,15 @@ export const validateEmployerFormData = (data: Omit<EmployerFormData, "id">): Er
 
 export const validateJobFormData = (job: Omit<JobFormData, "id">): Errors<JobFormData> => {
   const errors: Errors<JobFormData> = {};
+  if (job.jobTitle.trim().length < 10) {
+    errors.jobTitle = "Job title is required and must be at least 10 characters long.";
+  }
+  if (job.employerId < 1) {
+    errors.employerId = "Employer is required.";
+  }
+  if (job.responsibilities.trim().length < 10) {
+    errors.responsibilities = "Responsibilities are required and must be at least 10 characters long.";
+  }
 
   return errors;
 }

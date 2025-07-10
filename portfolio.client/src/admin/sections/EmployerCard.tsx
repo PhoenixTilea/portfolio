@@ -1,7 +1,7 @@
 import {Button, Card, CardActions, CardContent, CardHeader} from "@mui/material";
 import type {FC} from "react";
 import {memo} from "react";
-import type {Employer} from "../types/employer";
+import type {Employer} from "../../types/employer";
 
 type Props = {
   employer: Employer;

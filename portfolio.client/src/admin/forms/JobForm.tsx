@@ -1,6 +1,6 @@
 import {Alert, Button, MenuItem, TextField} from "@mui/material";
 import type {ChangeEvent, FC, FormEvent} from "react";
-import {useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useMemo, useState} from "react";
 import {useAddJobMutation, useGetEmployersQuery, useGetEnumDataQuery, useUpdateJobMutation} from "../../state/hooks";
 import type {Job, JobFormData} from "../../types/job";
 import {getMsgFromApiError} from "../../utils/errorUtils";
@@ -50,23 +50,23 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
     }));
   }
 
-  const handleDateChange = (start: Date, end?: Date, valid = false) => {
+  const handleDateChange = useCallback((start: Date, end?: Date, valid = false) => {
     setInputs(prev => ({
       ...prev,
       startDate: start,
       endDate: end
     }));
     setDatesValid(valid);
-  }
+  }, [setInputs, setDatesValid]);
 
-  const handleToggleSkill = (id: number) => {
+  const handleToggleSkill = useCallback((id: number) => {
     setInputs(prev => ({
       ...prev,
       skillsUsed: prev.skillsUsed.includes(id)
         ? prev.skillsUsed.filter(s => s !== id)
         : [...prev.skillsUsed, id]
     }));
-  }
+  }, [setInputs]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -108,6 +108,8 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
         value={inputs.employerId}
         onChange={handleChange}
         label="Employer *"
+        error={errors.employerId ? true : false}
+        helperText={errors.employerId ?? ""}
         select
         required
       >
@@ -139,6 +141,8 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
         label="Responsibilities *"
         multiline
         minRows={6}
+        error={errors.responsibilities ? true : false}
+        helperText={errors.responsibilities ?? ""}
         required
       />
       <h3>Skills Used</h3>
@@ -151,6 +155,7 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
 
       <Button
         type="submit"
+        disabled={!datesValid}
         loading={addIsLoading || updateIsLoading}
       >
         {!job ? "Add" : "Update"} Job
