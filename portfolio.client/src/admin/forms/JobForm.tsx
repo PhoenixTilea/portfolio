@@ -1,12 +1,12 @@
-import {Alert, Button, TextField} from "@mui/material";
+import {Alert, Button, MenuItem, TextField} from "@mui/material";
 import type {ChangeEvent, FC, FormEvent} from "react";
-import {useEffect, useState} from "react";
-import {useAddJobMutation, useUpdateJobMutation} from "../../state/hooks";
+import {useEffect, useMemo, useState} from "react";
+import {useAddJobMutation, useGetEmployersQuery, useGetEnumDataQuery, useUpdateJobMutation} from "../../state/hooks";
 import type {Job, JobFormData} from "../../types/job";
 import {getMsgFromApiError} from "../../utils/errorUtils";
-import {isNullOrWhiteSpace} from "../../utils/stringUtils";
-import {Errors, validateJobFormData} from "./validators";
+import JobDateRange from "./JobDateRange";
 import SkillTransferList from "./SkillTransferList";
+import {Errors, validateJobFormData} from "./validators";
 
 type Props = {
   job?: Job;
@@ -15,12 +15,19 @@ type Props = {
 type Inputs = Omit<JobFormData, "id">;
 
 const JobForm: FC<Props> = ({job, onCancel}) => {
+  const {data: enums} = useGetEnumDataQuery();
+  const {data: employers} = useGetEmployersQuery();
   const [addJob, {isLoading: addIsLoading, error: addError}] = useAddJobMutation();
   const [updateJob, {isLoading: updateIsLoading, error: updateError}] = useUpdateJobMutation();
 
   const [inputs, setInputs] = useState<Inputs>(toFormData(job));
+  const [datesValid, setDatesValid] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors<JobFormData>>({});
   const [apiError, setApiError] = useState<string | null>();
+
+  const employmentTypes = useMemo<[string, string][]>(() => (
+    Object.entries(enums?.employmentTypes ?? {})
+  ), [enums]);
 
   useEffect(() => {
     setInputs(toFormData(job));
@@ -43,6 +50,15 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
     }));
   }
 
+  const handleDateChange = (start: Date, end?: Date, valid = false) => {
+    setInputs(prev => ({
+      ...prev,
+      startDate: start,
+      endDate: end
+    }));
+    setDatesValid(valid);
+  }
+
   const handleToggleSkill = (id: number) => {
     setInputs(prev => ({
       ...prev,
@@ -56,7 +72,7 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
     e.preventDefault();
     const errs = validateJobFormData(inputs);
     setErrors(errs);
-    if (Object.keys(errs).length > 0) {
+    if (!datesValid || Object.keys(errs).length > 0) {
       return;
     }
 
@@ -67,6 +83,10 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
     job
       ? updateJob(data)
       : addJob(data);
+  }
+
+  if (!(enums && employers)) {
+    return null;
   }
 
   return (
@@ -82,7 +102,45 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
         required
         slotProps={{htmlInput: {minLength: 10}}}
       />
-
+      <TextField
+        id="jobEmp"
+        name="employerId"
+        value={inputs.employerId}
+        onChange={handleChange}
+        label="Employer *"
+        select
+        required
+      >
+        <MenuItem value={0} disabled>-- Select --</MenuItem>
+        {employers.map(e => (
+          <MenuItem key={e.id} value={e.id}>{e.name}</MenuItem>
+        ))}
+      </TextField>
+      <TextField
+        id="jobType"
+        name="type"
+        value={inputs.type}
+        onChange={handleChange}
+        label="Employment Type *"
+        select
+        required
+      >
+        {employmentTypes.map(([id, name]) => (
+          <MenuItem key={id} value={id}>{name}</MenuItem>
+        ))}
+      </TextField>
+      <h3>Dates Employed</h3>
+      <JobDateRange startDate={inputs.startDate} endDate={inputs.endDate} onDateChange={handleDateChange} />
+      <TextField
+        id="jobResp"
+        name="Responsibilities"
+        value={inputs.responsibilities}
+        onChange={handleChange}
+        label="Responsibilities *"
+        multiline
+        minRows={6}
+        required
+      />
       <h3>Skills Used</h3>
       <SkillTransferList selectedSkills={inputs.skillsUsed} onToggleSkill={handleToggleSkill} />
 
