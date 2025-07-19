@@ -1,9 +1,9 @@
 export type Skill = {
   id: number;
-  learnedBy: string[];
+  learnedBy: number[];
   name: string;
-  proficiency: string;
-  type: string;
+  proficiency: number;
+  type: number;
   yearLearned?: number;
 };
 

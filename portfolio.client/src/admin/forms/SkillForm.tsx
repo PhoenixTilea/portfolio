@@ -11,6 +11,7 @@ type Props = {
   onCancel: () => void;
 };
 type Inputs = Omit<SkillFormData, "id">;
+const enumFieldNames: (keyof Inputs)[] = ["proficiency", "type"];
 
 const SkillForm: FC<Props> = ({skill, onCancel}) => {
   const {data: enums} = useGetEnumDataQuery();
@@ -46,18 +47,14 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = e.currentTarget;
-    if (name === "yearLearned") {
-      const year = parseInt(value, 10);
-      setInputs(prev => ({...prev, yearLearned: year}));
-    } else {
-      setInputs(prev => ({
-        ...prev,
-        [name as keyof Inputs]: value.trim()
-      }));
-    }
+
+    setInputs(prev => ({
+      ...prev,
+      [name as keyof Inputs]: value.trim()
+    }));
   }
 
-  const handleLearnedChange = (e: ReactMouseEvent<HTMLElement>, values: string[]) =>
+  const handleLearnedChange = (e: ReactMouseEvent<HTMLElement>, values: number[]) =>
     setInputs(prev => ({...prev, learnedBy: values}));
 
   const handleSubmit = (e: FormEvent) => {
@@ -165,8 +162,8 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
 const toFormData = (skill?: Skill) => ({
   name: skill?.name ?? "",
   learnedBy: skill?.learnedBy.slice() ?? [],
-  proficiency: skill?.proficiency ?? "",
-  type: skill?.type ?? "",
+  proficiency: skill?.proficiency ?? 0,
+  type: skill?.type ?? 0,
   yearLearned: skill?.yearLearned
 });
 

@@ -1,6 +1,6 @@
 import {Grid} from "@mui/material";
 import {DateField} from "@mui/x-date-pickers";
-import type {} from "@mui/x-date-pickers/adapterDayjs";
+import type {} from "@mui/x-date-pickers/AdapterDayjs";
 import type {PickerValidDate} from "@mui/x-date-pickers/models";
 import dayJs from "dayjs";
 import isSameOrAfter from "dayjs/plugin/isSameOrAfter";

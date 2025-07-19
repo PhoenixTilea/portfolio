@@ -1,6 +1,6 @@
 export type Enums = {
-  employmentTypes: Record<string, string>;
-  learnTypes: Record<string, string>;
-  proficiencies: Record<string, string>;
-  skillTypes: Record<string, string>;
+  employmentTypes: Record<number, string>;
+  learnTypes: Record<number, string>;
+  proficiencies: Record<number, string>;
+  skillTypes: Record<number, string>;
 };

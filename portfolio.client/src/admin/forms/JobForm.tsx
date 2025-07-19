@@ -44,6 +44,9 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const {name, value} = e.currentTarget;
+    const val = name === "employmentType"
+      ? parseInt(value, 10)
+      : value;
     setInputs(prev => ({
       ...prev,
       [name as keyof Inputs]: value.trim()
@@ -175,7 +178,7 @@ const toFormData = (job?: Job) => ({
   responsibilities: job?.responsibilities ?? "",
   skillsUsed: job?.skillsUsed.map(s => s.id) ?? [],
   startDate: job?.startDate ?? new Date(),
-  type: job?.type ?? ""
+  type: job?.type ?? 0
 });
 
 const sanitizeFormData = (data: JobFormData): JobFormData => ({
