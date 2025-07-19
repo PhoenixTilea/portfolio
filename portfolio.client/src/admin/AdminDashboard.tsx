@@ -2,6 +2,7 @@ import {TabContext, TabList, TabPanel} from "@mui/lab";
 import {Box, Paper, Tab} from "@mui/material";
 import {useState} from "react";
 import EmployerTab from "./sections/EmployerTab";
+import JobTab from "./sections/JobTab";
 import SkillTab from "./sections/SkillTab";
 
 const AdminDashboard = () => {
@@ -22,6 +23,7 @@ const AdminDashboard = () => {
           <SkillTab />
         </TabPanel>
         <TabPanel value={2}>
+          <JobTab />
         </TabPanel>
       </TabContext>
     </Box>
