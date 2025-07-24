@@ -76,7 +76,7 @@ const EmployerForm: FC<Props> = ({employer, onCancel}) => {
         id="empPhone"
         type="tel"
         name="phone"
-        value={inputs.phone}
+        value={inputs.phone ?? ""}
         label="Employer Phone Number"
         onChange={handleChange}
         error={errors?.phone ? true : false}
@@ -86,7 +86,7 @@ const EmployerForm: FC<Props> = ({employer, onCancel}) => {
         id="empLinkedIn"
         type="url"
         name="linkedIn"
-        value={inputs.linkedIn}
+        value={inputs.linkedIn ?? ""}
         label="Employer LinkedIn"
         onChange={handleChange}
         error={errors?.linkedIn ? true : false}
@@ -96,7 +96,7 @@ const EmployerForm: FC<Props> = ({employer, onCancel}) => {
         id="empWebsite"
         type="url"
         name="website"
-        value={inputs.website}
+        value={inputs.website ?? ""}
         label="Employer Website"
         onChange={handleChange}
         error={errors?.website ? true : false}

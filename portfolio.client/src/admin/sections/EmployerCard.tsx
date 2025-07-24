@@ -11,7 +11,10 @@ type Props = {
 
 const EmployerCard: FC<Props> = ({employer, onEdit, onDelete}) => (
   <Card>
-    <CardHeader>{employer.name}</CardHeader>
+    <CardHeader
+      component="h3"
+      title={employer.name}
+    />
     <CardContent>
       <p>
         <strong>Phone:</strong> {employer.phone ?? "-"}

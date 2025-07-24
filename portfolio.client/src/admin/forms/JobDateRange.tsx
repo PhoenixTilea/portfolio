@@ -45,7 +45,7 @@ const JobDateRange: FC<Props> = ({startDate, endDate, onDateChange}) => {
       <Grid size={6}>
         <DateField
           label="Start Date *"
-          format="mm-yyyy"
+          format="MM-YYYY"
           value={start}
           onChange={handleStartChange}
           minDate={minDate}
@@ -57,8 +57,8 @@ const JobDateRange: FC<Props> = ({startDate, endDate, onDateChange}) => {
       <Grid size={6}>
         <DateField
           label="End Date"
-          format="mm-yyyy"
-          value={end}
+          format="MM-YYYY"
+          value={end ?? null}
           onChange={handleEndChange}
           clearable
           minDate={start ?? minDate}

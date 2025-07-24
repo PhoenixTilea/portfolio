@@ -26,7 +26,7 @@ const SkillList: FC<Props> = ({onEdit}) => {
   return (
     <Grid container spacing={8}>
       {skills.map(skill => (
-        <Grid size={{xs: 12, sm: 6, md: 4}}>
+        <Grid key={skill.id} size={{xs: 12, sm: 6, md: 4}}>
           <SkillCard key={skill.id}
             skill={skill}
             onDelete={handleDelete}

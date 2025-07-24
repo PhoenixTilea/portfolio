@@ -36,11 +36,11 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
   }, [addError, updateError]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {name, value} = e.currentTarget;
+    const {name, value} = e.target;
 
     setInputs(prev => ({
       ...prev,
-      [name as keyof Inputs]: value.trim()
+      [name as keyof Inputs]: typeof value === "string" ? value.trim() : value
     }));
   }
 
@@ -86,6 +86,7 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
         label="Skill Type *"
         value={inputs.type}
         onChange={handleChange}
+        select
         required
       >
         {enums.skillTypes.map((text, val) => (
@@ -98,6 +99,7 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
         label="Skill Proficiency *"
         value={inputs.proficiency}
         onChange={handleChange}
+        select
         required
       >
         {enums.proficiencies.map((text, val) => (
@@ -108,12 +110,13 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
         id="skYear"
         name="yearLearned"
         value={inputs.yearLearned ?? ""}
+        onChange={handleChange}
         label="Year Learned"
         error={errors.yearLearned ? true : false}
         helperText={errors.yearLearned ?? ""}
         slotProps={{
           htmlInput: {
-            pattern: "2\d{3}"
+            pattern: "2\\d{3}"
           }
         }}
       />

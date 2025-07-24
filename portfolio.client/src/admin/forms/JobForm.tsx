@@ -39,13 +39,10 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
   }, [addError, updateError]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const {name, value} = e.currentTarget;
-    const val = name === "employmentType"
-      ? parseInt(value, 10)
-      : value;
+    const {name, value} = e.target;
     setInputs(prev => ({
       ...prev,
-      [name as keyof Inputs]: value.trim()
+      [name as keyof Inputs]: value
     }));
   }
 
@@ -84,7 +81,6 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
       : addJob(data);
   }
 
-  console.log(enums);
   if (!enums || !Array.isArray(employers)) {
     return <h1>Loading</h1>;
   }
@@ -135,7 +131,7 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
       <JobDateRange startDate={inputs.startDate} endDate={inputs.endDate} onDateChange={handleDateChange} />
       <TextField
         id="jobResp"
-        name="Responsibilities"
+        name="responsibilities"
         value={inputs.responsibilities}
         onChange={handleChange}
         label="Responsibilities *"

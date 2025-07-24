@@ -13,7 +13,7 @@ type Props = {
 
 const JobCard: FC<Props> = ({job, onEdit, onDelete, employmentTypes}) => {
   const timespan = useMemo<string>(() => {
-    const totalMonths = dayJs(job.startDate).diff(job.endDate ?? new Date(), "month");
+    const totalMonths = Math.abs(dayJs(job.startDate).diff(job.endDate ?? new Date(), "month"));
     const years = Math.floor(totalMonths / 12);
     const months = totalMonths % 12;
     let parts: string[] = [];
@@ -26,14 +26,15 @@ const JobCard: FC<Props> = ({job, onEdit, onDelete, employmentTypes}) => {
     return parts.join(", ");
   }, [job]);
   const responsibilityList = useMemo<string[]>(() => (
-    job.responsibilities.split(/((\r)?\n)+/)
+    job.responsibilities.split(/\n+/)
   ), [job]);
 
   return (
     <Card>
-      <CardHeader>
-        {job.jobTitle} at {job.employer.name}
-      </CardHeader>
+      <CardHeader
+        component="h3"
+        title={`${job.jobTitle} at ${job.employer.name}`}
+      />
       <CardContent>
         <p>
           <strong>Employment Type:</strong> {employmentTypes[job.type]}

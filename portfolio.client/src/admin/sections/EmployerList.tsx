@@ -25,7 +25,7 @@ const EmployerList: FC<Props> = ({onEdit}) => {
   return (
     <Grid container spacing={8}>
       {employers.map(emp => (
-        <Grid size={{xs: 12, sm: 6, md: 4}}>
+        <Grid key={emp.id} size={{xs: 12, sm: 6, md: 4}}>
           <EmployerCard key={emp.id}
             employer={emp}
             onDelete={handleDelete}

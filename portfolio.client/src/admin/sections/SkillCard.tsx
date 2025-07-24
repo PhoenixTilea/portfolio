@@ -14,7 +14,10 @@ type Props = {
 
 const SkillCard: FC<Props> = ({skill, onEdit, onDelete, skillTypes, learnTypes, proficiencies}) => (
   <Card>
-    <CardHeader>{skill.name}</CardHeader>
+    <CardHeader
+      component="h3"
+      title={skill.name}
+    />
     <CardContent>
       <p>
         <strong>Type: </strong> {skillTypes[skill.type]}
