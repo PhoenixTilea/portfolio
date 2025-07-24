@@ -5,12 +5,13 @@ import {memo, useMemo} from "react";
 import type {Job} from "../../types/job";
 
 type Props = {
+  employmentTypes: string[];
   job: Job;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
 };
 
-const JobCard: FC<Props> = ({job, onEdit, onDelete}) => {
+const JobCard: FC<Props> = ({job, onEdit, onDelete, employmentTypes}) => {
   const timespan = useMemo<string>(() => {
     const totalMonths = dayJs(job.startDate).diff(job.endDate ?? new Date(), "month");
     const years = Math.floor(totalMonths / 12);
@@ -35,7 +36,7 @@ const JobCard: FC<Props> = ({job, onEdit, onDelete}) => {
       </CardHeader>
       <CardContent>
         <p>
-          <strong>Employment Type:</strong> {job.type}
+          <strong>Employment Type:</strong> {employmentTypes[job.type]}
         </p>
         <p>
           <strong>Employed For:</strong> {timespan}

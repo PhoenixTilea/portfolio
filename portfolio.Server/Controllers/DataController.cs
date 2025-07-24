@@ -2,6 +2,7 @@ namespace Portfolio.Server.Controllers;
 
 using Core.Enums;
 using Core.Extensions;
+using EnumsNET;
 using Microsoft.AspNetCore.Mvc;
 
 /// <summary>
@@ -17,10 +18,10 @@ public sealed class DataController : ControllerBase
   {
     var data = new
     {
-      EmploymentTypes = EnumExtensions.ToDictionary<EmploymentType>(),
-      LearnTypes = EnumExtensions.ToDictionary<Learned>(),
-      Proficiencies = EnumExtensions.ToDictionary<Proficiency>(),
-      SkillTypes = EnumExtensions.ToDictionary<SkillType>()
+      EmploymentTypes = EnumExtensions.ToNameList<EmploymentType>(),
+      LearnTypes = EnumExtensions.ToNameList<Learned>(),
+      Proficiencies = EnumExtensions.ToNameList<Proficiency>(),
+      SkillTypes = EnumExtensions.ToNameList<SkillType>()
     };
     return Ok(data);
   }

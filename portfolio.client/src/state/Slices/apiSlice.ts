@@ -21,7 +21,7 @@ const tags = {
 const api = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: "/api"
+    baseUrl: "/api/"
   }),
   tagTypes: Array.from(Object.values(tags)),
   endpoints: builder => ({

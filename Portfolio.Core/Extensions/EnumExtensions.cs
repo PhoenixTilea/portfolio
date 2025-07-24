@@ -5,10 +5,8 @@ using EnumsNET;
 
 public static class EnumExtensions
 {
-  public static Dictionary<T, string> ToDictionary<T>() where T : struct, System.Enum =>
-    Enum.GetValues<T>()
-      .ToDictionary(
-        v => v,
-        v => Enums.AsString<T>(v, EnumFormat.Description, EnumFormat.Name) ?? v.ToString()
-      );
+  public static List<string> ToNameList<TEnum>() where TEnum : struct, Enum =>
+      Enums.GetValues<TEnum>()
+        .Select(v => Enums.AsString<TEnum>(v, EnumFormat.Description, EnumFormat.Name) ?? string.Empty)
+        .ToList();
 }

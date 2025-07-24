@@ -1,7 +1,7 @@
 import {Grid} from "@mui/material";
 import type {FC} from "react";
 import {memo, useCallback} from "react";
-import {useDeleteJobMutation, useGetJobsQuery} from "../../state/hooks";
+import {useDeleteJobMutation, useGetEnumDataQuery, useGetJobsQuery} from "../../state/hooks";
 import JobCard from "./JobCard";
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
 
 const JobList: FC<Props> = ({onEdit}) => {
   const {data: jobs} = useGetJobsQuery();
+  const {data: enums} = useGetEnumDataQuery();
   const [deleteJob] = useDeleteJobMutation();
 
   const handleDelete = useCallback((id: number) => {
@@ -18,7 +19,7 @@ const JobList: FC<Props> = ({onEdit}) => {
     }
   }, [deleteJob]);
 
-  if (!jobs) {
+  if (!jobs || !enums) {
     return null;
   }
 
@@ -30,6 +31,7 @@ const JobList: FC<Props> = ({onEdit}) => {
             job={job}
             onDelete={handleDelete}
             onEdit={onEdit}
+            employmentTypes={enums.employmentTypes}
           />
         </Grid>
       ))}

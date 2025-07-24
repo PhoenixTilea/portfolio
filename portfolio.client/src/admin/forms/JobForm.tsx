@@ -1,6 +1,6 @@
 import {Alert, Button, MenuItem, TextField} from "@mui/material";
 import type {ChangeEvent, FC, FormEvent} from "react";
-import {useCallback, useEffect, useMemo, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import {useAddJobMutation, useGetEmployersQuery, useGetEnumDataQuery, useUpdateJobMutation} from "../../state/hooks";
 import type {Job, JobFormData} from "../../types/job";
 import {getMsgFromApiError} from "../../utils/errorUtils";
@@ -24,10 +24,6 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
   const [datesValid, setDatesValid] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors<JobFormData>>({});
   const [apiError, setApiError] = useState<string | null>();
-
-  const employmentTypes = useMemo<[string, string][]>(() => (
-    Object.entries(enums?.employmentTypes ?? {})
-  ), [enums]);
 
   useEffect(() => {
     setInputs(toFormData(job));
@@ -88,8 +84,9 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
       : addJob(data);
   }
 
-  if (!(enums && employers)) {
-    return null;
+  console.log(enums);
+  if (!enums || !Array.isArray(employers)) {
+    return <h1>Loading</h1>;
   }
 
   return (
@@ -130,7 +127,7 @@ const JobForm: FC<Props> = ({job, onCancel}) => {
         select
         required
       >
-        {employmentTypes.map(([id, name]) => (
+        {enums.employmentTypes.map((name, id) => (
           <MenuItem key={id} value={id}>{name}</MenuItem>
         ))}
       </TextField>

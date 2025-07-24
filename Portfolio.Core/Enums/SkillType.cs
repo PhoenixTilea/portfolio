@@ -15,6 +15,7 @@ public enum SkillType
   Language,
   Library,
   Pattern,
+  Practice,
   [Description("Soft Skill")]
   SoftSkill,
   Standard

@@ -1,6 +1,6 @@
 import {Alert, Button, MenuItem, TextField, ToggleButton, ToggleButtonGroup} from "@mui/material";
 import type {ChangeEvent, FC, FormEvent, MouseEvent as ReactMouseEvent} from "react";
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import {useAddSkillMutation, useGetEnumDataQuery, useUpdateSkillMutation} from "../../state/hooks";
 import type {Skill, SkillFormData} from "../../types/skill";
 import {getMsgFromApiError} from "../../utils/errorUtils";
@@ -21,16 +21,6 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
   const [inputs, setInputs] = useState<Inputs>(toFormData(skill));
   const [errors, setErrors] = useState<Errors<SkillFormData>>({});
   const [apiError, setApiError] = useState<string | null>();
-
-  const skillTypes = useMemo<[string, string][]>(() => (
-    Object.entries(enums?.skillTypes ?? {})
-  ), [enums]);
-  const profs = useMemo<[string, string][]>(() => (
-    Object.entries(enums?.proficiencies ?? {})
-  ), [enums]);
-  const learnTypes = useMemo<[string, string][]>(() => (
-    Object.entries(enums?.learnTypes ?? {})
-  ), [enums]);
 
   useEffect(() => {
     setInputs(toFormData(skill));
@@ -98,7 +88,7 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
         onChange={handleChange}
         required
       >
-        {skillTypes.map(([val, text]) => (
+        {enums.skillTypes.map((text, val) => (
           <MenuItem key={val} value={val}>{text}</MenuItem>
         ))}
       </TextField>
@@ -110,7 +100,7 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
         onChange={handleChange}
         required
       >
-        {profs.map(([val, text]) => (
+        {enums.proficiencies.map((text, val) => (
           <MenuItem key={val} value={val}>{text}</MenuItem>
         ))}
       </TextField>
@@ -133,7 +123,7 @@ const SkillForm: FC<Props> = ({skill, onCancel}) => {
         value={inputs.learnedBy}
         onChange={handleLearnedChange}
       >
-        {learnTypes.map(([val, text]) => (
+        {enums.learnTypes.map((text, val) => (
           <ToggleButton key={val} value={val}>
             {text}
           </ToggleButton>

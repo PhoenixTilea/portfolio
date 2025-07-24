@@ -1,7 +1,7 @@
 import {Grid} from "@mui/material";
 import type {FC} from "react";
 import {memo, useCallback} from "react";
-import {useDeleteSkillMutation, useGetSkillsQuery} from "../../state/hooks";
+import {useDeleteSkillMutation, useGetEnumDataQuery, useGetSkillsQuery} from "../../state/hooks";
 import SkillCard from "./SkillCard";
 
 type Props = {
@@ -10,6 +10,7 @@ type Props = {
 
 const SkillList: FC<Props> = ({onEdit}) => {
   const {data: skills} = useGetSkillsQuery();
+  const {data: enums} = useGetEnumDataQuery();
   const [deleteSkill] = useDeleteSkillMutation();
 
   const handleDelete = useCallback((id: number) => {
@@ -18,7 +19,7 @@ const SkillList: FC<Props> = ({onEdit}) => {
     }
   }, [deleteSkill]);
 
-  if (!skills) {
+  if (!skills || !enums) {
     return null;
   }
 
@@ -30,6 +31,9 @@ const SkillList: FC<Props> = ({onEdit}) => {
             skill={skill}
             onDelete={handleDelete}
             onEdit={onEdit}
+            skillTypes={enums.skillTypes}
+            learnTypes={enums.learnTypes}
+            proficiencies={enums.proficiencies}
           />
         </Grid>
       ))}

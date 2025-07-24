@@ -7,20 +7,24 @@ type Props = {
   skill: Skill;
   onEdit: (id: number) => void;
   onDelete: (id: number) => void;
+  skillTypes: string[];
+  learnTypes: string[];
+  proficiencies: string[];
 };
 
-const SkillCard: FC<Props> = ({skill, onEdit, onDelete}) => (
+const SkillCard: FC<Props> = ({skill, onEdit, onDelete, skillTypes, learnTypes, proficiencies}) => (
   <Card>
     <CardHeader>{skill.name}</CardHeader>
     <CardContent>
       <p>
-        <strong>Type: </strong> {skill.type}
+        <strong>Type: </strong> {skillTypes[skill.type]}
       </p>
       <p>
-        <strong>Proficiency:</strong>  {skill.proficiency}
+        <strong>Proficiency:</strong> {proficiencies[skill.proficiency]}
       </p>
       <p>
-        <strong>Learned by:</strong> {skill.learnedBy.join(", ")}
+        <strong>Learned by:</strong>
+        {skill.learnedBy.map(l => learnTypes[l]).join(", ")}
       </p>
       <p>
         <strong>Year Learned:</strong> {skill.yearLearned ?? "-"}
